@@ -5,39 +5,71 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pmacademy.razvii_project1.databinding.ActivityWinnerListBinding
+import java.lang.Exception
 
 class WinnerListActivity : AppCompatActivity() {
 
     companion object {
 
+        private lateinit var recyclerViewAdapter: GameListRecyclerViewAdapter
+        private var onWinnerListScreen = false
+
         fun start(context: Context) {
             val intent = Intent(context, WinnerListActivity::class.java)
-
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             context.startActivity(intent)
         }
+
+        fun updateRV(context: Context) {
+            if (onWinnerListScreen) {
+                if (WinnerList.getSizeList() == 1) {
+                    start(context)
+                } else {
+                    try {
+                        recyclerViewAdapter.notifyDataSetChanged()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+
+        }
+
     }
 
     private lateinit var bindings: ActivityWinnerListBinding
     private lateinit var gameList: ArrayList<String>
 
-    private lateinit var recyclerViewAdapter: GameListRecyclerViewAdapter
     private lateinit var recyclerViewGameList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindings = ActivityWinnerListBinding.inflate(layoutInflater)
         setContentView(bindings.root)
-
         setupActionBar()
         gameList = WinnerList.getListWinners()
         setupRecyclerView()
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onWinnerListScreen = false
+        Log.d("mainss", "$onWinnerListScreen onPause")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onWinnerListScreen = true
+        Log.d("mainss", "$onWinnerListScreen onResume")
     }
 
     private fun setupActionBar() {

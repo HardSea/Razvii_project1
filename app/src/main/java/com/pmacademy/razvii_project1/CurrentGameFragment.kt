@@ -67,9 +67,9 @@ class CurrentGameFragment : Fragment() {
                     updateCountDownTimer(millisUntilFinished)
                     totalPlayedTime++
                 }
-
                 override fun onFinish() {
                     showGameResult()
+                    context.let { WinnerListActivity.updateRV(context!!) }
                     Toast.makeText(context, "Time finished", Toast.LENGTH_SHORT).show()
                 }
             }
