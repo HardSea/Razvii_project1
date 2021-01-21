@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_win_trophy" />
+
+    <TextView
+        android:id="@+id/tv_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:gravity="center"
+        tools:text="Winner — Names \nTeam — Names\n
+10:10\n
+01:20:00" />
+
+
+    <Button
+        android:id="@+id/btn_share_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/ic_share"
+        android:text="Share result"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/btn_go_to_main_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="Close"
+        android:textColor="@color/black" />
+
+
+</LinearLayout>

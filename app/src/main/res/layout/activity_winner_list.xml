@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    tools:context=".WinnerListActivity">
+
+    <TextView
+        android:id="@+id/tv_empty_list_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="Winner list are empty" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_winner"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:itemCount="20"
+        tools:listitem="@layout/rv_list_winner_item" />
+
+</LinearLayout>

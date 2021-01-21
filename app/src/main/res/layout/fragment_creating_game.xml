@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_NameFirstTeam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="Name of the first team"
+        android:hint="Name of the first team"
+        android:inputType="textCapWords"
+        android:lines="1"
+        android:maxLines="1" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_NameSecondTeam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="Name of the first team"
+        android:hint="Name of the second team"
+        android:inputType="textCapWords"
+        android:lines="1"
+        android:maxLines="1" />
+
+
+    <Button
+        android:id="@+id/btnSetupTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Set time for game"
+        tools:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tvGameTime"
+        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Game time: "
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <Button
+        android:id="@+id/btnStartGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Start" />
+
+
+</LinearLayout>

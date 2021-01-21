@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Time left:"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvTimeLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="00:00:00"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvGameScoreFirstTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="00"
+                android:textColor="@color/black"
+                android:textSize="68sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvNameFirstTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:maxWidth="180dp"
+                android:lines="3"
+                android:text="Team name 1"
+                android:textColor="@color/black"
+                tools:text="Command long team name example first" />
+
+
+            <ImageButton
+                android:id="@+id/btnAddPointFirstTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@drawable/selector_imagebtn"
+                android:contentDescription="Plus 1 for first command"
+                android:padding="16dp"
+                android:src="@drawable/ic_plus_1" />
+
+            <ImageButton
+                android:id="@+id/btnNegPointFirstTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Minus 1 for first command"
+                android:padding="4dp"
+                android:src="@drawable/ic_neg_1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvGameScoreSecondTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="00"
+                android:textColor="@color/black"
+                android:textSize="68sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvNameSecondTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:maxWidth="180dp"
+                android:lines="3"
+                android:text="Team name 2"
+                android:textColor="@color/black"
+                tools:text="Command long team name example second" />
+
+
+            <ImageButton
+                android:id="@+id/btnAddPointSecondTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@drawable/selector_imagebtn"
+                android:contentDescription="Plus 1 for first command"
+                android:padding="16dp"
+                android:src="@drawable/ic_plus_1" />
+
+            <ImageButton
+                android:id="@+id/btnNegPointSecondTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Minus 1 for first command"
+                android:padding="4dp"
+                android:src="@drawable/ic_neg_1" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvCancelGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:text="Cancel Game" />
+</LinearLayout>
