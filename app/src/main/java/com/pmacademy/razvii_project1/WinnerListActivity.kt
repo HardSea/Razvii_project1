@@ -9,11 +9,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pmacademy.razvii_project1.databinding.ActivityWinnerListBinding
-import java.lang.Exception
 
 class WinnerListActivity : AppCompatActivity() {
 
@@ -22,31 +20,27 @@ class WinnerListActivity : AppCompatActivity() {
         private lateinit var recyclerViewAdapter: GameListRecyclerViewAdapter
         private var onWinnerListScreen = false
 
-        fun start(context: Context) {
+        fun start(context: Context, update: Boolean = false) {
+
             val intent = Intent(context, WinnerListActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            if (update){
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
             context.startActivity(intent)
         }
 
         fun updateRV(context: Context) {
             if (onWinnerListScreen) {
-                if (WinnerList.getSizeList() == 1) {
-                    start(context)
-                } else {
-                    try {
-                        recyclerViewAdapter.notifyDataSetChanged()
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
+                if (WinnerList.size >= 1) {
+                    start(context, update = true)
                 }
             }
-
         }
-
     }
 
     private lateinit var bindings: ActivityWinnerListBinding
-    private lateinit var gameList: ArrayList<String>
+    private lateinit var gameListPair: List<Pair<String, Int>>
 
     private lateinit var recyclerViewGameList: RecyclerView
 
@@ -55,7 +49,7 @@ class WinnerListActivity : AppCompatActivity() {
         bindings = ActivityWinnerListBinding.inflate(layoutInflater)
         setContentView(bindings.root)
         setupActionBar()
-        gameList = WinnerList.getListWinners()
+        gameListPair = WinnerList.getListPairWinners()
         setupRecyclerView()
 
     }
@@ -102,7 +96,7 @@ class WinnerListActivity : AppCompatActivity() {
     }
 
     private fun clearWinnerList() {
-        if (WinnerList.getSizeList() > 0) {
+        if (WinnerList.size > 0) {
             WinnerList.clearList()
             recyclerViewAdapter.notifyDataSetChanged()
             bindings.rvListWinner.visibility = View.GONE
@@ -111,7 +105,7 @@ class WinnerListActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        if (gameList.isEmpty()) {
+        if (gameListPair.isEmpty()) {
             bindings.rvListWinner.visibility = View.GONE
             bindings.tvEmptyListInfo.visibility = View.VISIBLE
         } else {
@@ -119,7 +113,7 @@ class WinnerListActivity : AppCompatActivity() {
             bindings.rvListWinner.visibility = View.VISIBLE
             recyclerViewGameList = bindings.rvListWinner
             recyclerViewGameList.layoutManager = LinearLayoutManager(this)
-            recyclerViewAdapter = GameListRecyclerViewAdapter(gameList)
+            recyclerViewAdapter = GameListRecyclerViewAdapter(gameListPair)
             recyclerViewGameList.adapter = recyclerViewAdapter
         }
     }
@@ -132,7 +126,7 @@ class WinnerListActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.btn_clear_list -> {
-            if (WinnerList.getSizeList() > 0) askUserClearList()
+            if (WinnerList.size > 0) askUserClearList()
             true
         }
         else -> super.onOptionsItemSelected(item)

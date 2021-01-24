@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+
+    <TextView
+        android:id="@+id/tv_time_left_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/time_left"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_time_left_value"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_time_left_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_game_score_first_team"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_time_left_text"
+        tools:text="00:00:00" />
+
+
+    <TextView
+        android:id="@+id/tv_game_score_first_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/black"
+        android:textSize="68sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_name_first_team"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_game_score_second_team"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time_left_value"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:text="@string/zeros_string" />
+
+    <TextView
+        android:id="@+id/tv_name_first_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:lines="3"
+        android:maxWidth="180dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_point_first_team"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_name_second_team"
+        app:layout_constraintTop_toBottomOf="@id/tv_game_score_first_team"
+        tools:text="Command long team name example first" />
+
+
+    <ImageButton
+        android:id="@+id/btn_add_point_first_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/selector_imagebtn"
+        android:contentDescription="@string/content_description_plus_1_for_first_command"
+        android:padding="16dp"
+        android:src="@drawable/ic_plus_1"
+        app:layout_constraintBottom_toTopOf="@id/btn_neg_point_first_team"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_add_point_second_team"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_first_team" />
+
+    <ImageButton
+        android:id="@+id/btn_neg_point_first_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/content_description_minus_1_for_first_command"
+        android:padding="4dp"
+        android:src="@drawable/ic_neg_1"
+        app:layout_constraintBottom_toTopOf="@id/tv_cancel_game"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_neg_point_second_team"
+        app:layout_constraintTop_toBottomOf="@id/btn_add_point_first_team" />
+
+
+    <TextView
+        android:id="@+id/tv_game_score_second_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        android:textSize="68sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_name_second_team"
+        app:layout_constraintLeft_toRightOf="@id/tv_game_score_first_team"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_game_score_first_team"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:text="@string/zeros_string" />
+
+    <TextView
+        android:id="@+id/tv_name_second_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:lines="3"
+        android:maxWidth="180dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_point_second_team"
+        app:layout_constraintLeft_toRightOf="@id/tv_name_first_team"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_game_score_second_team"
+        tools:text="Command long team name example second" />
+
+
+    <ImageButton
+        android:id="@+id/btn_add_point_second_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/selector_imagebtn"
+        android:contentDescription="@string/content_description_plus_1_for_first_command"
+        android:padding="16dp"
+        android:src="@drawable/ic_plus_1"
+        app:layout_constraintBottom_toTopOf="@id/btn_neg_point_second_team"
+        app:layout_constraintLeft_toRightOf="@id/btn_add_point_first_team"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_second_team" />
+
+    <ImageButton
+        android:id="@+id/btn_neg_point_second_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/content_description_minus_1_for_first_command"
+        android:padding="4dp"
+        android:src="@drawable/ic_neg_1"
+        app:layout_constraintBottom_toTopOf="@id/tv_cancel_game"
+        app:layout_constraintLeft_toRightOf="@+id/btn_neg_point_first_team"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_add_point_second_team" />
+
+
+    <TextView
+        android:id="@+id/tv_cancel_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/cancel_game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_neg_point_first_team" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

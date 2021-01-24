@@ -6,38 +6,36 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class GameListRecyclerViewAdapter(private val gameList: ArrayList<String>) :
+class GameListRecyclerViewAdapter(private val gameList: List<Pair<String, Int>>) :
     RecyclerView.Adapter<GameListRecyclerViewAdapter.GameListViewHolder>() {
-
-
-    private lateinit var winnerPairList: List<Pair<String, Int>>
-
-    private fun createPairListFromArrayList() {
-        winnerPairList = gameList.groupingBy { it }.eachCount().toList().sortedByDescending{ it.second }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameListViewHolder {
 
-        createPairListFromArrayList()
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.rv_list_winner_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.rv_list_winner_item, parent, false)
         return GameListViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: GameListViewHolder, position: Int) {
-        val winnerName = winnerPairList[position].first
-        val winnerScore = winnerPairList[position].second
-        holder.tvGame?.text = holder.itemView.context.getString(R.string.rv_text_list_winners, winnerName, winnerScore)
+        val winnerName = this.gameList[position].first
+        val winnerScore = this.gameList[position].second
+        holder.bindItem(winnerName, winnerScore)
     }
 
     override fun getItemCount(): Int {
-        return gameList.groupingBy { it }.eachCount().toList().size
+        return this.gameList.size
     }
 
     class GameListViewHolder(itemVIew: View) : RecyclerView.ViewHolder(itemVIew) {
-        var tvGame: TextView? = null
+        private var tvWinnerItem: TextView? = null
+
+        fun bindItem(winnerName: String, winnerScore: Int) {
+            tvWinnerItem?.text =
+                itemView.context.getString(R.string.rv_text_list_winners, winnerName, winnerScore)
+        }
 
         init {
-            tvGame = itemVIew.findViewById(R.id.tv_winner)
+            tvWinnerItem = itemVIew.findViewById(R.id.tv_winner)
         }
 
     }

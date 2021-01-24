@@ -4,6 +4,9 @@ class WinnerList {
     companion object {
         private val winnerList: ArrayList<String> = arrayListOf()
 
+        val size: Int
+            get() = winnerList.size
+
         fun clearList() {
             winnerList.clear()
         }
@@ -12,12 +15,10 @@ class WinnerList {
             winnerList.add(teamName)
         }
 
-        fun getSizeList(): Int {
-            return winnerList.size
-        }
 
-        fun getListWinners(): ArrayList<String> {
-            return winnerList
+        fun getListPairWinners(): List<Pair<String, Int>> {
+            return winnerList.groupingBy { it }.eachCount().toList()
+                .sortedByDescending { it.second }
         }
     }
 }

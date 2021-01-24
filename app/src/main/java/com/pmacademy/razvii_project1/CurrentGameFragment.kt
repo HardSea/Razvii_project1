@@ -67,6 +67,7 @@ class CurrentGameFragment : Fragment() {
                     updateCountDownTimer(millisUntilFinished)
                     totalPlayedTime++
                 }
+
                 override fun onFinish() {
                     showGameResult()
                     context.let { WinnerListActivity.updateRV(context!!) }
@@ -87,7 +88,7 @@ class CurrentGameFragment : Fragment() {
         val strFormatted =
             String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
 
-        binding.tvTimeLeft.text = strFormatted
+        binding.tvTimeLeftValue.text = strFormatted
     }
 
     private fun changeGameScore(score: Int, team: TeamSequentialNumber) {
@@ -208,9 +209,11 @@ class CurrentGameFragment : Fragment() {
                 }
             }
     }
+
+    private enum class TeamSequentialNumber {
+        FIRST_TEAM,
+        SECOND_TEAM
+    }
 }
 
-private enum class TeamSequentialNumber {
-    FIRST_TEAM,
-    SECOND_TEAM
-}
+
