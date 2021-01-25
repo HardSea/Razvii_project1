@@ -3,12 +3,11 @@ package com.pmacademy.razvii_project1
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pmacademy.razvii_project1.databinding.ActivityWinnerListBinding
@@ -21,9 +20,8 @@ class WinnerListActivity : AppCompatActivity() {
         private var onWinnerListScreen = false
 
         fun start(context: Context, update: Boolean = false) {
-
             val intent = Intent(context, WinnerListActivity::class.java)
-            if (update){
+            if (update) {
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             }
@@ -57,18 +55,15 @@ class WinnerListActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         onWinnerListScreen = false
-        Log.d("mainss", "$onWinnerListScreen onPause")
     }
 
     override fun onResume() {
         super.onResume()
         onWinnerListScreen = true
-        Log.d("mainss", "$onWinnerListScreen onResume")
     }
 
     private fun setupActionBar() {
         val actionBar = supportActionBar
-
         actionBar?.title = "List of winners"
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -118,7 +113,6 @@ class WinnerListActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_winner_list_menu, menu)
         return true
@@ -131,5 +125,4 @@ class WinnerListActivity : AppCompatActivity() {
         }
         else -> super.onOptionsItemSelected(item)
     }
-
 }

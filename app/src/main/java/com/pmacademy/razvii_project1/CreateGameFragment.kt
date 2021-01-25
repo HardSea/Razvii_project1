@@ -4,24 +4,21 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.pmacademy.razvii_project1.databinding.FragmentCreatingGameBinding
 import java.util.*
 
-
 class CreateGameFragment : Fragment() {
-
 
     private lateinit var binding: FragmentCreatingGameBinding
 
     private var hoursGameTime: Int = 0
     private var minutesGameTime: Int = 0
     private var timeChosen = false
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +29,12 @@ class CreateGameFragment : Fragment() {
         return binding.root
     }
 
-
     private fun setupListeners() {
         binding.btnSetupTime.setOnClickListener {
-            startTimePickerDialog()
+            showTimePickerDialog()
         }
         binding.tvGameTime.setOnClickListener {
-            startTimePickerDialog()
+            showTimePickerDialog()
         }
         binding.btnStartGame.setOnClickListener {
             startGameFragment()
@@ -46,7 +42,6 @@ class CreateGameFragment : Fragment() {
         binding.editNameFirstTeam.addTextChangedListener(textWatcher)
         binding.editNameSecondTeam.addTextChangedListener(textWatcher)
     }
-
 
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -56,10 +51,8 @@ class CreateGameFragment : Fragment() {
         }
 
         override fun afterTextChanged(s: Editable?) {
-
             checkEditTextsForRules()
         }
-
     }
 
     private fun checkEditTextsForRules() {
@@ -79,11 +72,9 @@ class CreateGameFragment : Fragment() {
         val emptyLines = editFirstTeamName.length() != 0 && editSecondTeamName.length() != 0
 
         btnStart.isEnabled = timeChosen && emptyLines && sameText
-
     }
 
-    private fun startTimePickerDialog() {
-
+    private fun showTimePickerDialog() {
         val onTimeSetListener =
             TimePickerDialog.OnTimeSetListener { _, hour, minute ->
                 hoursGameTime = hour
@@ -92,7 +83,6 @@ class CreateGameFragment : Fragment() {
                 checkEditTextsForRules()
                 showTvWithTime()
             }
-
         TimePickerDialog(
             context,
             R.style.TimePickerTheme,
@@ -128,7 +118,6 @@ class CreateGameFragment : Fragment() {
         binding.tvGameTime.text = strBuf.toString()
         binding.tvGameTime.visibility = View.VISIBLE
         binding.btnSetupTime.visibility = View.GONE
-
     }
 
     private fun startGameFragment() {
@@ -136,23 +125,21 @@ class CreateGameFragment : Fragment() {
             binding.editNameFirstTeam.text.toString().trim().replace("\\s+".toRegex(), " ")
         val secondTeamName =
             binding.editNameSecondTeam.text.toString().trim().replace("\\s+".toRegex(), " ")
-
+        val firstTeam = Team(firstTeamName)
+        val secondTeam = Team(secondTeamName)
         val creatingGameFragment = CurrentGameFragment.newInstance(
-            firstTeamName,
-            secondTeamName,
+            firstTeam,
+            secondTeam,
             hoursGameTime,
             minutesGameTime
         )
-
         fragmentManager?.beginTransaction()?.replace(R.id.root_container, creatingGameFragment)
             ?.commitAllowingStateLoss()
-
     }
 
     private fun timeToMinute(hour: Int, minute: Int): Int {
         return hour * 60 + minute
     }
-
 
     companion object {
         fun newInstance() = CreateGameFragment()

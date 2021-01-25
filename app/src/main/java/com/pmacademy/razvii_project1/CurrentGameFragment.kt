@@ -3,26 +3,25 @@ package com.pmacademy.razvii_project1
 import android.app.AlertDialog
 import android.os.Bundle
 import android.os.CountDownTimer
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.pmacademy.razvii_project1.databinding.FragmentCurrentGameBinding
-import java.lang.StringBuilder
 import java.util.*
 
-private const val ARG_PARAM_TEAM_NAME_FIRST = "com.pmacademy.razvii_project1.firstTeamName"
-private const val ARG_PARAM_TEAM_NAME_SECOND = "com.pmacademy.razvii_project1.secondTeamName"
+private const val ARG_PARAM_TEAM_FIRST = "com.pmacademy.razvii_project1.firstTeam"
+private const val ARG_PARAM_TEAM_SECOND = "com.pmacademy.razvii_project1.secondTeam"
 private const val ARG_PARAM_HOURS_GAME = "com.pmacademy.razvii_project1.hoursGameTime"
 private const val ARG_PARAM_MINUTES_GAME = "com.pmacademy.razvii_project1.minutesGameTime"
 
 
 class CurrentGameFragment : Fragment() {
 
-    private var firstTeamName: String? = null
-    private var secondTeamName: String? = null
+    private var firstTeam: Team? = null
+    private var secondTeam: Team? = null
     private var hoursGameTime: Int? = null
     private var minutesGameTime: Int? = null
 
@@ -38,11 +37,10 @@ class CurrentGameFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            firstTeamName = it.getString(ARG_PARAM_TEAM_NAME_FIRST)
-            secondTeamName = it.getString(ARG_PARAM_TEAM_NAME_SECOND)
+            firstTeam = it.getParcelable(ARG_PARAM_TEAM_FIRST)
+            secondTeam = it.getParcelable(ARG_PARAM_TEAM_SECOND)
             hoursGameTime = it.getInt(ARG_PARAM_HOURS_GAME)
             minutesGameTime = it.getInt(ARG_PARAM_MINUTES_GAME)
-
         }
     }
 
@@ -52,8 +50,8 @@ class CurrentGameFragment : Fragment() {
     ): View {
         binding = FragmentCurrentGameBinding.inflate(layoutInflater, container, false)
         setupListeners()
-        binding.tvNameFirstTeam.text = firstTeamName
-        binding.tvNameSecondTeam.text = secondTeamName
+        binding.tvNameFirstTeam.text = firstTeam?.name
+        binding.tvNameSecondTeam.text = secondTeam?.name
         startTimer()
         return binding.root
     }
@@ -71,7 +69,7 @@ class CurrentGameFragment : Fragment() {
                 override fun onFinish() {
                     showGameResult()
                     context.let { WinnerListActivity.updateRV(context!!) }
-                    Toast.makeText(context, "Time finished", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Time's up", Toast.LENGTH_SHORT).show()
                 }
             }
             countDownTimer.start()
@@ -84,10 +82,8 @@ class CurrentGameFragment : Fragment() {
         val hours = (timeLeftInMillis / (1000 * 60 * 60)) % 60
         val minutes = (timeLeftInMillis / (1000 * 60)) % 60
         val seconds = (timeLeftInMillis / 1000) % 60
-
         val strFormatted =
             String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
-
         binding.tvTimeLeftValue.text = strFormatted
     }
 
@@ -116,13 +112,12 @@ class CurrentGameFragment : Fragment() {
     }
 
     private fun cancelGame() {
-        var saveGameResult = false
+        var isSaveGameResult = false
         val checkBoxView = View.inflate(context, R.layout.alertdialog_chekbox, null)
         val checkBox = checkBoxView.findViewById<View>(R.id.checkbox_alert_dialog) as CheckBox
         checkBox.setOnCheckedChangeListener { _, isChecked ->
-            saveGameResult = isChecked
+            isSaveGameResult = isChecked
         }
-
         checkBox.text = getString(R.string.checkbox_text_q)
 
         val builder = AlertDialog.Builder(context)
@@ -131,7 +126,7 @@ class CurrentGameFragment : Fragment() {
             .setCancelable(false)
             .setPositiveButton("Yes") { _, _ ->
                 countDownTimer.cancel()
-                if (saveGameResult) {
+                if (isSaveGameResult) {
                     showGameResult()
                 } else {
                     startCreateGameFragment()
@@ -144,17 +139,16 @@ class CurrentGameFragment : Fragment() {
 
     private fun startCreateGameFragment() {
         val creatingGameFragment = CreateGameFragment.newInstance()
-
         fragmentManager?.beginTransaction()?.replace(R.id.root_container, creatingGameFragment)
             ?.commitAllowingStateLoss()
     }
 
     private fun showGameResult() {
         saveGameResult()
-        if (firstTeamName != null && secondTeamName != null) {
+        if (firstTeam != null && secondTeam != null) {
             val resultGameFragment = ResultGameFragment.newInstance(
-                firstTeamName!!,
-                secondTeamName!!,
+                firstTeam!!,
+                secondTeam!!,
                 scoreFirstTeam,
                 scoreSecondTeam,
                 totalPlayedTime
@@ -168,9 +162,9 @@ class CurrentGameFragment : Fragment() {
         // if draw we don't save game result in winner list
         if (scoreFirstTeam != scoreSecondTeam)
             if (scoreFirstTeam > scoreSecondTeam) {
-                firstTeamName?.let { WinnerList.addWinner(it) }
+                firstTeam?.name.let { WinnerList.addWinner(firstTeam?.name!!) }
             } else {
-                secondTeamName?.let { WinnerList.addWinner(it) }
+                secondTeam?.name.let { WinnerList.addWinner(secondTeam?.name!!) }
             }
     }
 
@@ -195,15 +189,15 @@ class CurrentGameFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(
-            firstTeamName: String,
-            secondTeamName: String,
+            firstTeam: Team,
+            secondTeam: Team,
             hoursGameTime: Int,
             minutesGameTime: Int
         ) =
             CurrentGameFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM_TEAM_NAME_FIRST, firstTeamName)
-                    putString(ARG_PARAM_TEAM_NAME_SECOND, secondTeamName)
+                    putParcelable(ARG_PARAM_TEAM_FIRST, firstTeam)
+                    putParcelable(ARG_PARAM_TEAM_SECOND, secondTeam)
                     putInt(ARG_PARAM_HOURS_GAME, hoursGameTime)
                     putInt(ARG_PARAM_MINUTES_GAME, minutesGameTime)
                 }
@@ -215,5 +209,3 @@ class CurrentGameFragment : Fragment() {
         SECOND_TEAM
     }
 }
-
-

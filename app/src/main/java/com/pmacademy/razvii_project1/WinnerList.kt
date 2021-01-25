@@ -15,7 +15,7 @@ class WinnerList {
             winnerList.add(teamName)
         }
 
-
+        //return sorted list of winner and number winning games
         fun getListPairWinners(): List<Pair<String, Int>> {
             return winnerList.groupingBy { it }.eachCount().toList()
                 .sortedByDescending { it.second }

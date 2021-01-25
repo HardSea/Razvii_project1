@@ -6,24 +6,24 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.pmacademy.razvii_project1.databinding.FragmentResultGameBinding
 import java.util.*
 
 
-private const val ARG_PARAM_TEAM_NAME_FIRST = "com.pmacademy.razvii_project1.firstTeamName"
-private const val ARG_PARAM_TEAM_NAME_SECOND = "com.pmacademy.razvii_project1.secondTeamName"
+private const val ARG_PARAM_TEAM_FIRST = "com.pmacademy.razvii_project1.firstTeam"
+private const val ARG_PARAM_TEAM_SECOND = "com.pmacademy.razvii_project1.secondTeam"
 private const val ARG_PARAM_TEAM_SCORE_FIRST = "com.pmacademy.razvii_project1.firstTeamScore"
 private const val ARG_PARAM_TEAM_SCORE_SECOND = "com.pmacademy.razvii_project1.secondTeamScore"
 private const val ARG_PARAM_TOTAL_GAME_TIME = "com.pmacademy.razvii_project1.totalGameTime"
 
 
 class ResultGameFragment : Fragment() {
-    private var firstTeamName: String? = null
-    private var secondTeamName: String? = null
+    private var firstTeam: Team? = null
+    private var secondTeam: Team? = null
     private var firstTeamScore: Int? = null
     private var secondTeamScore: Int? = null
     private var totalGameTime: Int? = null
@@ -36,8 +36,8 @@ class ResultGameFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            firstTeamName = it.getString(ARG_PARAM_TEAM_NAME_FIRST)
-            secondTeamName = it.getString(ARG_PARAM_TEAM_NAME_SECOND)
+            firstTeam = it.getParcelable(ARG_PARAM_TEAM_FIRST)
+            secondTeam = it.getParcelable(ARG_PARAM_TEAM_SECOND)
             firstTeamScore = it.getInt(ARG_PARAM_TEAM_SCORE_FIRST)
             secondTeamScore = it.getInt(ARG_PARAM_TEAM_SCORE_SECOND)
             totalGameTime = it.getInt(ARG_PARAM_TOTAL_GAME_TIME)
@@ -94,14 +94,14 @@ class ResultGameFragment : Fragment() {
                 strWinner = winnerTeamString
             } else {
                 winnerTeamString = if (firstTeamScore!! > secondTeamScore!!) {
-                    firstTeamName!!
+                    firstTeam?.name!!
                 } else {
-                    secondTeamName!!
+                    secondTeam?.name!!
                 }
                 strWinner += winnerTeamString
             }
 
-            val strNames = "Game: $firstTeamName — $secondTeamName"
+            val strNames = "Game: ${firstTeam?.name} — ${secondTeam?.name}"
             val strScores = "Total score: $firstTeamScore:$secondTeamScore"
             var strTotalGameTime = String()
             totalGameTime?.let {
@@ -144,22 +144,20 @@ class ResultGameFragment : Fragment() {
         } else {
             String.format(Locale.getDefault(), "%02d:%02d", minutes, totalSeconds)
         }
-
     }
 
     companion object {
-
         fun newInstance(
-            firstTeamName: String,
-            secondTeamName: String,
+            firstTeam: Team,
+            secondTeam: Team,
             firstTeamScore: Int,
             secondTeamScore: Int,
             totalGameTime: Int
         ) =
             ResultGameFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM_TEAM_NAME_FIRST, firstTeamName)
-                    putString(ARG_PARAM_TEAM_NAME_SECOND, secondTeamName)
+                    putParcelable(ARG_PARAM_TEAM_FIRST, firstTeam)
+                    putParcelable(ARG_PARAM_TEAM_SECOND, secondTeam)
                     putInt(ARG_PARAM_TEAM_SCORE_FIRST, firstTeamScore)
                     putInt(ARG_PARAM_TEAM_SCORE_SECOND, secondTeamScore)
                     putInt(ARG_PARAM_TOTAL_GAME_TIME, totalGameTime)
