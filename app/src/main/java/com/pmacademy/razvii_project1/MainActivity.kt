@@ -26,10 +26,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startWinnerListActivity() {
-        //TODO("input game list array")
         WinnerListActivity.start(this)
         overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {

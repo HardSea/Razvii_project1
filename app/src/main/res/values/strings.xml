@@ -9,5 +9,7 @@
     <string name="content_description_minus_1_for_first_command">Minus 1 for first command</string>
     <string name="cancel_game">Cancel Game</string>
     <string name="zeros_string">00</string>
+    <string name="set_game_time">Set game time</string>
+    <string name="start">Start</string>
 
 </resources>

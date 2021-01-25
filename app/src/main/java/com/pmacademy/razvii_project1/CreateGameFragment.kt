@@ -2,12 +2,15 @@ package com.pmacademy.razvii_project1
 
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.pmacademy.razvii_project1.databinding.FragmentCreatingGameBinding
+import java.util.*
 
 
 class CreateGameFragment : Fragment() {
@@ -17,6 +20,7 @@ class CreateGameFragment : Fragment() {
 
     private var hoursGameTime: Int = 0
     private var minutesGameTime: Int = 0
+    private var timeChosen = false
 
 
     override fun onCreateView(
@@ -28,6 +32,7 @@ class CreateGameFragment : Fragment() {
         return binding.root
     }
 
+
     private fun setupListeners() {
         binding.btnSetupTime.setOnClickListener {
             startTimePickerDialog()
@@ -38,24 +43,44 @@ class CreateGameFragment : Fragment() {
         binding.btnStartGame.setOnClickListener {
             startGameFragment()
         }
+        binding.editNameFirstTeam.addTextChangedListener(textWatcher)
+        binding.editNameSecondTeam.addTextChangedListener(textWatcher)
     }
 
-    private fun startGameFragment() {
-        val firstTeamName = binding.editNameFirstTeam.text.toString()
-        val secondTeamName = binding.editNameSecondTeam.text.toString()
 
-        val creatingGameFragment = CurrentGameFragment.newInstance(
-            firstTeamName,
-            secondTeamName,
-            hoursGameTime,
-            minutesGameTime
-        )
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
 
-        fragmentManager?.beginTransaction()?.replace(R.id.root_container, creatingGameFragment)
-            ?.commitAllowingStateLoss()
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+
+            checkEditTextsForRules()
+        }
 
     }
 
+    private fun checkEditTextsForRules() {
+        val editFirstTeamName = binding.editNameFirstTeam
+        val editSecondTeamName = binding.editNameSecondTeam
+        val btnStart = binding.btnStartGame
+
+        val textFirstEdit =
+            editFirstTeamName.text.toString().trim().replace("\\s+".toRegex(), " ")
+                .toLowerCase(Locale.ROOT)
+        val textSecondEdit =
+            editSecondTeamName.text.toString().trim().replace("\\s+".toRegex(), " ").toLowerCase(
+                Locale.ROOT
+            )
+
+        val sameText = textFirstEdit != textSecondEdit
+        val emptyLines = editFirstTeamName.length() != 0 && editSecondTeamName.length() != 0
+
+        btnStart.isEnabled = timeChosen && emptyLines && sameText
+
+    }
 
     private fun startTimePickerDialog() {
 
@@ -63,6 +88,8 @@ class CreateGameFragment : Fragment() {
             TimePickerDialog.OnTimeSetListener { _, hour, minute ->
                 hoursGameTime = hour
                 minutesGameTime = minute
+                timeChosen = true
+                checkEditTextsForRules()
                 showTvWithTime()
             }
 
@@ -77,7 +104,6 @@ class CreateGameFragment : Fragment() {
     }
 
     private fun showTvWithTime() {
-
         val strBuf = StringBuffer()
         strBuf.append("Game time: ")
 
@@ -102,6 +128,24 @@ class CreateGameFragment : Fragment() {
         binding.tvGameTime.text = strBuf.toString()
         binding.tvGameTime.visibility = View.VISIBLE
         binding.btnSetupTime.visibility = View.GONE
+
+    }
+
+    private fun startGameFragment() {
+        val firstTeamName =
+            binding.editNameFirstTeam.text.toString().trim().replace("\\s+".toRegex(), " ")
+        val secondTeamName =
+            binding.editNameSecondTeam.text.toString().trim().replace("\\s+".toRegex(), " ")
+
+        val creatingGameFragment = CurrentGameFragment.newInstance(
+            firstTeamName,
+            secondTeamName,
+            hoursGameTime,
+            minutesGameTime
+        )
+
+        fragmentManager?.beginTransaction()?.replace(R.id.root_container, creatingGameFragment)
+            ?.commitAllowingStateLoss()
 
     }
 
