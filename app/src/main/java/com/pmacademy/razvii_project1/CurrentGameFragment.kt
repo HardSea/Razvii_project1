@@ -162,9 +162,9 @@ class CurrentGameFragment : Fragment() {
         // if draw we don't save game result in winner list
         if (scoreFirstTeam != scoreSecondTeam)
             if (scoreFirstTeam > scoreSecondTeam) {
-                firstTeam?.name.let { WinnerList.addWinner(firstTeam?.name!!) }
+                firstTeam?.name.let { WinnerList.addWinner(firstTeam?.name!!, scoreFirstTeam) }
             } else {
-                secondTeam?.name.let { WinnerList.addWinner(secondTeam?.name!!) }
+                secondTeam?.name.let { WinnerList.addWinner(secondTeam?.name!!, scoreSecondTeam) }
             }
     }
 

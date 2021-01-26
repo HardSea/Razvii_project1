@@ -47,7 +47,7 @@ class WinnerListActivity : AppCompatActivity() {
         bindings = ActivityWinnerListBinding.inflate(layoutInflater)
         setContentView(bindings.root)
         setupActionBar()
-        gameListPair = WinnerList.getListPairWinners()
+        gameListPair = WinnerList.getDescendingListPairWinners()
         setupRecyclerView()
 
     }

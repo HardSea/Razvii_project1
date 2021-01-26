@@ -2,7 +2,7 @@ package com.pmacademy.razvii_project1
 
 class WinnerList {
     companion object {
-        private val winnerList: ArrayList<String> = arrayListOf()
+        private val winnerList: ArrayList<Pair<String, Int>> = arrayListOf()
 
         val size: Int
             get() = winnerList.size
@@ -11,14 +11,24 @@ class WinnerList {
             winnerList.clear()
         }
 
-        fun addWinner(teamName: String) {
-            winnerList.add(teamName)
+        fun addWinner(teamName: String, scoreCnt: Int) {
+            winnerList.add(Pair(teamName, scoreCnt))
         }
 
         //return sorted list of winner and number winning games
-        fun getListPairWinners(): List<Pair<String, Int>> {
-            return winnerList.groupingBy { it }.eachCount().toList()
-                .sortedByDescending { it.second }
+        fun getDescendingListPairWinners(): List<Pair<String, Int>> {
+
+            val winnersMap = winnerList.groupBy({ it.first }, { it.second })
+
+            val returnList: ArrayList<Pair<String, Int>> = arrayListOf()
+            val iteratorWinners = winnersMap.iterator()
+
+            for (winner in iteratorWinners) {
+                val sumScore = winner.value.sum()
+                returnList.add(Pair(winner.key, sumScore))
+            }
+
+            return returnList.sortedByDescending { it.second }
         }
     }
 }

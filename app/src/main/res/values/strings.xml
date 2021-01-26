@@ -3,7 +3,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="winner_list">Show winner list</string>
     <string name="checkbox_text_q">Save the result of this game?</string>
-    <string name="rv_text_list_winners">%1$s \nTotal winning games — %2$d</string>
+    <string name="rv_text_list_winners">%1$s \nTotal score — %2$d</string>
     <string name="time_left">Time left:</string>
     <string name="content_description_plus_1_for_first_command">Plus 1 for first command</string>
     <string name="content_description_minus_1_for_first_command">Minus 1 for first command</string>
