@@ -3,18 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/small_margin"
     android:background="@drawable/border"
-    android:orientation="vertical"
-    android:layout_margin="4dp">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_winner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/linear_layout_margin"
         android:maxLines="2"
-        android:textSize="16sp"
         android:textColor="@color/black"
+        android:textSize="@dimen/rv_item_text_size"
         tools:text="Recycler View Item\nRecycler View Item" />
 
 </LinearLayout>

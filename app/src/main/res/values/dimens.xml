@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="checkbox_margin">5dp</dimen>
+    <dimen name="linear_layout_margin">8dp</dimen>
+    <dimen name="text_size_main_text">18sp</dimen>
+    <dimen name="view_margin">16dp</dimen>
+    <dimen name="timer_text_size">26sp</dimen>
+    <dimen name="game_score_text_size">68sp</dimen>
+    <dimen name="game_score_text_margin">12dp</dimen>
+    <dimen name="team_name_text_margin">8dp</dimen>
+    <dimen name="team_name_text_max_width">180dp</dimen>
+    <dimen name="image_button_add_score_padding">16dp</dimen>
+    <dimen name="small_margin">4dp</dimen>
+    <dimen name="image_button_neg_score_padding">4dp</dimen>
+    <dimen name="winner_text_size">20sp</dimen>
+    <dimen name="rv_item_text_size">16sp</dimen>
+</resources>

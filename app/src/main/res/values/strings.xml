@@ -11,5 +11,12 @@
     <string name="zeros_string">00</string>
     <string name="set_game_time">Set game time</string>
     <string name="start">Start</string>
+    <string name="empty_rv_list">Winner list are empty</string>
+    <string name="hint_edit_text_team1">Name of the first team</string>
+    <string name="hint_edit_text_team2">Name of the second team</string>
+    <string name="game_time">Game time:</string>
+    <string name="winner_image">Winner image</string>
+    <string name="share_result">Share result</string>
+    <string name="close">Close</string>
 
 </resources>

@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -21,20 +21,21 @@
             android:gravity="center"
             android:text="@string/time_left"
             android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="@dimen/timer_text_size" />
 
         <TextView
             android:id="@+id/tv_time_left_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="26sp"
+            android:textSize="@dimen/timer_text_size"
             tools:text="00:00:00" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -48,21 +49,21 @@
                 android:id="@+id/tv_game_score_first_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/game_score_text_margin"
+                android:text="@string/zeros_string"
                 android:textColor="@color/black"
-                android:textSize="68sp"
-                android:textStyle="bold"
-                android:text="@string/zeros_string" />
+                android:textSize="@dimen/game_score_text_size"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_name_first_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="@dimen/team_name_text_margin"
+                android:layout_marginBottom="@dimen/team_name_text_margin"
                 android:gravity="center"
                 android:lines="3"
-                android:maxWidth="180dp"
+                android:maxWidth="@dimen/team_name_text_max_width"
                 android:textColor="@color/black"
                 tools:text="Command long team name example first" />
 
@@ -71,10 +72,10 @@
                 android:id="@+id/btn_add_point_first_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/small_margin"
                 android:background="@drawable/selector_imagebtn"
                 android:contentDescription="@string/content_description_plus_1_for_first_command"
-                android:padding="16dp"
+                android:padding="@dimen/image_button_add_score_padding"
                 android:src="@drawable/ic_plus_1" />
 
             <ImageButton
@@ -84,7 +85,7 @@
                 android:layout_margin="4dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/content_description_minus_1_for_first_command"
-                android:padding="4dp"
+                android:padding="@dimen/image_button_neg_score_padding"
                 android:src="@drawable/ic_neg_1" />
         </LinearLayout>
 
@@ -99,21 +100,21 @@
                 android:id="@+id/tv_game_score_second_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/game_score_text_margin"
+                android:text="@string/zeros_string"
                 android:textColor="@color/black"
-                android:layout_marginTop="12dp"
-                android:textSize="68sp"
-                android:textStyle="bold"
-                android:text="@string/zeros_string" />
+                android:textSize="@dimen/game_score_text_size"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_name_second_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="@dimen/team_name_text_margin"
+                android:layout_marginBottom="@dimen/team_name_text_margin"
                 android:gravity="center"
                 android:lines="3"
-                android:maxWidth="180dp"
+                android:maxWidth="@dimen/team_name_text_max_width"
                 android:textColor="@color/black"
                 tools:text="Command long team name example second" />
 
@@ -122,21 +123,21 @@
                 android:id="@+id/btn_add_point_second_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/small_margin"
                 android:background="@drawable/selector_imagebtn"
                 android:contentDescription="@string/content_description_plus_1_for_first_command"
-                android:padding="16dp"
+                android:padding="@dimen/image_button_add_score_padding"
                 android:src="@drawable/ic_plus_1" />
 
             <ImageButton
                 android:id="@+id/btn_neg_point_second_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/small_margin"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/content_description_minus_1_for_first_command"
-                android:padding="4dp"
-                android:src="@drawable/ic_neg_1"/>
+                android:padding="@dimen/image_button_neg_score_padding"
+                android:src="@drawable/ic_neg_1" />
         </LinearLayout>
     </LinearLayout>
 
@@ -146,6 +147,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/cancel_game"/>
+        android:padding="@dimen/linear_layout_margin"
+        android:text="@string/cancel_game" />
 </LinearLayout>

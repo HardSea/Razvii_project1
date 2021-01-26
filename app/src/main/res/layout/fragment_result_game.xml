@@ -10,16 +10,17 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/winner_image"
         android:src="@drawable/ic_win_trophy" />
 
     <TextView
         android:id="@+id/tv_result_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:layout_margin="@dimen/small_margin"
         android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/winner_text_size"
         tools:text="Winner — Names \nTeam — Names\n
 10:10\n
 01:20:00" />
@@ -31,15 +32,16 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/ic_share"
-        android:text="Share result"
-        android:textColor="@color/black" />
+        android:text="@string/share_result"
+        android:textColor="@color/black"
+        tools:ignore="RtlHardcoded" />
 
     <Button
         android:id="@+id/btn_go_to_main_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:text="Close"
+        android:text="@string/close"
         android:textColor="@color/black" />
 
 

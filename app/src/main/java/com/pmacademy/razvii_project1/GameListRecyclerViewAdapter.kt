@@ -33,6 +33,7 @@ class GameListRecyclerViewAdapter(private val gameList: List<Pair<String, Int>>)
             tvWinnerItem?.text =
                 itemView.context.getString(R.string.rv_text_list_winners, winnerName, winnerScore)
         }
+
         init {
             tvWinnerItem = itemVIew.findViewById(R.id.tv_winner)
         }
